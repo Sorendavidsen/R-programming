@@ -1,0 +1,145 @@
+---
+title: "Temperaturer: list-columns, mapping og løkker"
+output: html_document
+---
+
+::::::::::::::::::::::::::::::::::::::: objectives
+
+- Define a function that takes arguments.
+- Return a value from a function.
+- Test a function.
+- Set default values for function arguments.
+- Explain why we should divide programs into small, single-purpose functions.
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::::::::::::::::: questions
+
+- How do I make a function?
+- How can I test my functions?
+- How should I document my code?
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
+
+Dette eksempel viser et lille datasæt med 20 observationer. Temperaturen står i én kolonne, selv om værdierne bruger Celsius, Fahrenheit og Kelvin. Kolonnen `forhold` er en *list-column*: hver række rummer en vektor med et eller flere vejrforhold.
+
+Pakker: `tibble`, `purrr` og `dplyr`.
+
+## Opret datasættet
+
+```{r}
+data <- tibble::tibble(
+  id = 1:20,
+  temperatur = c(
+    "18 °C", "68 °F", "294 K", "12 °C", "59 °F",
+    "281 K", "21 °C", "72 °F", "296 K", "7 °C",
+    "50 °F", "278 K", "19 °C", "70 °F", "293 K",
+    "15 °C", "64 °F", "285 K", "23 °C", "77 °F"
+  ),
+  sted = c(
+    "Inde", "Inde", "Inde", "Ude", "Ude",
+    "Ude", "Inde", "Inde", "Inde", "Ude",
+    "Ude", "Ude", "Inde", "Inde", "Inde",
+    "Ude", "Ude", "Ude", "Inde", "Inde"
+  ),
+  tidspunkt = rep(c("Morgen", "Middag", "Aften"), length.out = 20),
+  forhold = strsplit(c(
+    "tørt", "tørt,varmt", "fugtigt", "sol,blæst", "sol",
+    "regn,blæst", "tørt", "varmt,tørt", "fugtigt", "overskyet",
+    "sol,koldt", "regn", "tørt", "varmt", "fugtigt,varmt",
+    "sol,blæst", "overskyet", "regn,koldt", "tørt,varmt", "tørt"
+  ), ",")
+)
+
+data$forhold[[4]]  # To værdier i én celle: "sol" og "blæst"
+```
+
+## Map en funktion over list-column
+
+`map_int()` tæller vejrforholdene i hver række. `map_lgl()` undersøger, om "regn" findes blandt dem.
+
+```{r}
+data <- data |>
+  dplyr::mutate(
+    antal_forhold = purrr::map_int(forhold, length),
+    regn = purrr::map_lgl(forhold, \(x) "regn" %in% x)
+  )
+
+data[c("id", "forhold", "antal_forhold", "regn")]
+```
+
+## While-løkke: omregn temperaturerne
+
+`i` er rækkenummeret. Løkken fortsætter, så længe der er flere rækker. Vi trækker først tallet ud af teksten, undersøger enheden og gemmer resultatet i Celsius.
+
+```{r}
+data$temperatur_c <- rep(NA_real_, nrow(data))
+
+i <- 1
+while (i <= nrow(data)) {
+  tekst <- data$temperatur[i]
+  tal <- as.numeric(sub(" .*", "", tekst))
+
+  if (grepl("°C$", tekst)) {
+    data$temperatur_c[i] <- tal
+  } else if (grepl("°F$", tekst)) {
+    data$temperatur_c[i] <- (tal - 32) * 5 / 9
+  } else if (grepl("K$", tekst)) {
+    data$temperatur_c[i] <- tal - 273.15
+  } else {
+    stop("Ukendt temperaturenhed: ", tekst)
+  }
+
+  i <- i + 1
+}
+
+data[c("temperatur", "temperatur_c")]
+```
+
+For eksempel bliver 68 °F til 20 °C, og 294 K bliver til 20,85 °C.
+
+## For-løkke: beskriv vejrforholdene
+
+Her gennemgår vi den samme list-column række for række og samler hvert sæt forhold til én tekst.
+
+```{r}
+data$beskrivelse <- character(nrow(data))
+
+for (i in seq_len(nrow(data))) {
+  data$beskrivelse[i] <- paste(data$forhold[[i]], collapse = " og ")
+}
+
+data[c("id", "forhold", "beskrivelse")]
+```
+
+## `case_when()`: kategorisér temperaturerne
+
+`case_when()` undersøger betingelserne i den viste rækkefølge og danner en ny kategorisk kolonne. Her betyder "Mildt" fra 10 °C til under 20 °C.
+
+```{r}
+data <- data |>
+  dplyr::mutate(
+    temperaturkategori = dplyr::case_when(
+      temperatur_c < 10 ~ "Koldt",
+      temperatur_c < 20 ~ "Mildt",
+      .default = "Varmt"
+    )
+  )
+
+print(data, n = 20)
+```
+
+
+:::::::::::::::::::::::::::::::::::::::: keypoints
+
+- Define a function using `name <- function(...args...) {...body...}`.
+- Call a function using `name(...values...)`.
+- R looks for variables in the current stack frame before looking for them at the top level.
+- Use `help(thing)` to view help for something.
+- Put comments at the beginning of functions to provide help for that function.
+- Annotate your code!
+- Specify default values for arguments when defining a function using `name = value` in the argument list.
+- Arguments can be passed by matching based on name, by position, or by omitting them (in which case the default value is used).
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
