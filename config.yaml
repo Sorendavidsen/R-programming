@@ -66,16 +66,16 @@ contact: 'team@carpentries.org'
 # Order of episodes in your lesson
 episodes: 
 - introduction.Rmd
-- functions.Rmd
-- loops.Rmd
-- 02-func-R.Rmd
-- 03-loops-R.Rmd
-- 04-cond.Rmd
-- 10-supp-addressing-data.Rmd
-- 12-supp-factors.Rmd
 - 13-supp-data-structures.Rmd
-- 14-supp-call-stack.Rmd
+- 12-supp-factors.Rmd
+- 03-loops-R.Rmd
 - 15-supp-loops-in-depth.Rmd
+- 04-cond.Rmd
+- 02-func-R.Rmd
+- 10-supp-addressing-data.Rmd
+- 14-supp-call-stack.Rmd
+- eksempel-fra-chatty.Rmd
+
 
 # Information for Learners
 learners: 
