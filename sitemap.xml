@@ -1,6 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://Sorendavidsen.github.io/R-programming/02-func-R.html</loc>
+  </url>
+  <url>
+    <loc>https://Sorendavidsen.github.io/R-programming/03-loops-R.html</loc>
+  </url>
+  <url>
+    <loc>https://Sorendavidsen.github.io/R-programming/04-cond.html</loc>
+  </url>
+  <url>
+    <loc>https://Sorendavidsen.github.io/R-programming/10-supp-addressing-data.html</loc>
+  </url>
+  <url>
+    <loc>https://Sorendavidsen.github.io/R-programming/12-supp-factors.html</loc>
+  </url>
+  <url>
+    <loc>https://Sorendavidsen.github.io/R-programming/13-supp-data-structures.html</loc>
+  </url>
+  <url>
+    <loc>https://Sorendavidsen.github.io/R-programming/14-supp-call-stack.html</loc>
+  </url>
+  <url>
+    <loc>https://Sorendavidsen.github.io/R-programming/15-supp-loops-in-depth.html</loc>
+  </url>
+  <url>
     <loc>https://Sorendavidsen.github.io/R-programming/404.html</loc>
   </url>
   <url>
@@ -16,10 +40,37 @@
     <loc>https://Sorendavidsen.github.io/R-programming/citation.html</loc>
   </url>
   <url>
+    <loc>https://Sorendavidsen.github.io/R-programming/eksempel-fra-chatty.html</loc>
+  </url>
+  <url>
     <loc>https://Sorendavidsen.github.io/R-programming/images.html</loc>
   </url>
   <url>
     <loc>https://Sorendavidsen.github.io/R-programming/index.html</loc>
+  </url>
+  <url>
+    <loc>https://Sorendavidsen.github.io/R-programming/instructor/02-func-R.html</loc>
+  </url>
+  <url>
+    <loc>https://Sorendavidsen.github.io/R-programming/instructor/03-loops-R.html</loc>
+  </url>
+  <url>
+    <loc>https://Sorendavidsen.github.io/R-programming/instructor/04-cond.html</loc>
+  </url>
+  <url>
+    <loc>https://Sorendavidsen.github.io/R-programming/instructor/10-supp-addressing-data.html</loc>
+  </url>
+  <url>
+    <loc>https://Sorendavidsen.github.io/R-programming/instructor/12-supp-factors.html</loc>
+  </url>
+  <url>
+    <loc>https://Sorendavidsen.github.io/R-programming/instructor/13-supp-data-structures.html</loc>
+  </url>
+  <url>
+    <loc>https://Sorendavidsen.github.io/R-programming/instructor/14-supp-call-stack.html</loc>
+  </url>
+  <url>
+    <loc>https://Sorendavidsen.github.io/R-programming/instructor/15-supp-loops-in-depth.html</loc>
   </url>
   <url>
     <loc>https://Sorendavidsen.github.io/R-programming/instructor/404.html</loc>
@@ -35,6 +86,9 @@
   </url>
   <url>
     <loc>https://Sorendavidsen.github.io/R-programming/instructor/citation.html</loc>
+  </url>
+  <url>
+    <loc>https://Sorendavidsen.github.io/R-programming/instructor/eksempel-fra-chatty.html</loc>
   </url>
   <url>
     <loc>https://Sorendavidsen.github.io/R-programming/instructor/images.html</loc>
