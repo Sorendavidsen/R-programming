@@ -6,7 +6,7 @@ exercises: 2
 
 :::::::::::::::::::::::::::::::::::::: questions 
 
-- How do you write a lesson using R Markdown and `{sandpaper}`?
+- hvordan får vi lavet både side og slides?
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
